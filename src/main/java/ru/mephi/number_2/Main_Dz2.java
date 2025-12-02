@@ -34,10 +34,11 @@ public class Main_Dz2 {
 
         gr.setColor(Color.BLUE);
         for (int i = 0; i < ps.size() - 1; i++) {
-
             Point prev = calc(ps.get(i), ps.get(i + 1), kas.get(i), kas.get(i + 1), 0);
-            for (int j = 1; j <= 10_000; j++) {
-                double t = (double) j / 10_000;
+
+            int st = getSteps(ps.get(i), ps.get(i + 1), kas.get(i), kas.get(i + 1));
+            for (int j = 1; j <= st; j++) {
+                double t = (double) j / st;
                 Point cur = calc(ps.get(i), ps.get(i + 1), kas.get(i), kas.get(i + 1), t);
                 Utils.line(gr, prev.x, prev.y, cur.x, cur.y, 2);
                 prev = cur;
@@ -60,8 +61,17 @@ public class Main_Dz2 {
         return res;
     }
 
+    static int getSteps(Point p0, Point p1, Point kas0, Point kas1) {
+        int lk = (int) (1 + Math.hypot(kas0.x, kas0.y) + Math.hypot(kas1.x, kas1.y));
+        int dxy = 1 + Math.abs(p1.x - p0.x) + Math.abs(p1.y - p0.y);
+//        System.out.println(dxy / 3 + " " + lk / 9);
+
+        return Math.max(20, dxy / 3 + lk / 9);
+    }
+
     public static void main(String[] args) throws IOException {
         List<List<Integer>> ps = List.of(
+                List.of(100, 500, 300, 100, 600, 400, 2000, 2000),
                 List.of(100, 500, 300, 100, 600, 400),
                 List.of(100, 500, 300, 100, 600, 400),
                 List.of(100, 800, 500, 200, 900, 800),
@@ -81,6 +91,7 @@ public class Main_Dz2 {
         );
 
         List<List<Integer>> kas = List.of(
+                List.of(4000, -3000, 3000, 2000, 2000, -4000, 9999, 0),
                 List.of(400, -300, 300, 200, 200, -400),
                 List.of(-400, 300, -300, -200, -200, 400),
                 List.of(600, -400, 400, 500, 300, -300),

@@ -13,6 +13,7 @@ public class Main_Dz1 {
     public static void main(String[] args) throws IOException {
 
         List<List<Integer>> exs = List.of(
+                List.of(100, 100, 200, 200, 300, 300, 400, 400, 200, 200),
                 List.of(100, 100, 400, 80, 700, 200, 650, 500, 200, 450),
                 List.of(150, 150, 500, 150, 700, 400, 500, 700, 150, 700, 300, 400),
                 List.of(50, 500, 950, 500, 900, 520, 100, 520),
